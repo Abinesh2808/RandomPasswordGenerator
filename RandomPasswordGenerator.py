@@ -9,19 +9,18 @@ class RandomPasswordGenerator:
         self.op2 = IntVar()
         self.len_gth = StringVar()
         self.msg = StringVar()
-
+        self.frame = Frame(self.root)
+        self.frame.pack()
+        self.error = None
     def widgets(self):
-        frame = Frame(self.root)
-        frame.pack()
-
-        entry = Entry(frame, textvariable=self.len_gth,width=10)
-        label = Label(frame, text="Enter Password Length: ",font=("Roboto", 11))
-        check1 = Checkbutton(frame, text="Do you want to include Numbers ? ",
+        entry = Entry(self.frame, textvariable=self.len_gth,width=10)
+        label = Label(self.frame, text="Enter Password Length: ",font=("Roboto", 11))
+        check1 = Checkbutton(self.frame, text="Do you want to include Numbers ? ",
                              variable=self.op1, width=50,font=("Roboto", 11))
-        check2 = Checkbutton(frame, text="Do you want to include Special Characters ? ",
+        check2 = Checkbutton(self.frame, text="Do you want to include Special Characters ? ",
                              variable=self.op2, width=50,font=("Roboto", 11))
-        msg = Label(frame, textvariable=self.msg,font=("Roboto", 11),width=50)
-        btn = Button(frame, text="Click to Generate Password", command=self.generate,font=("Roboto", 11))
+        msg = Label(self.frame, textvariable=self.msg,font=("Roboto", 11),width=50)
+        btn = Button(self.frame, text="Click to Generate Password", command=self.generate,font=("Roboto", 11))
 
         label.grid(row=1, column=0, padx=90,columnspan=2)
         entry.grid(row=1, column=1, columnspan=3,pady=10)
@@ -30,7 +29,7 @@ class RandomPasswordGenerator:
         msg.grid(row=4, column=0, columnspan=3,pady=10)
         btn.grid(row=5, column=0, columnspan=3,pady=10)
 
-        frame.place(relx=0.5,rely=0.5,anchor="center")
+        self.frame.place(relx=0.5,rely=0.5,anchor="center")
 
     def generate(self):
         pass_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -38,19 +37,26 @@ class RandomPasswordGenerator:
         pass_chars_spchars = "@#$%&*ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*abcdefghijklmnopqrstuvwxyz@#$%&*"
         pass_chars_spchars_nums = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_@#$%&*_@#$%&*abcdefghijklmnopqrstuvwxyz"
 
-        if self.op1.get() == 1 and self.op2.get() == 1:
-            p = sample(pass_chars_spchars_nums, int(self.len_gth.get()))
-        elif self.op1.get() == 1:
-            p = sample(pass_chars_nums, int(self.len_gth.get()))
-        elif self.op2.get() == 1:
-            p = sample(pass_chars_spchars, int(self.len_gth.get()))
-        else:
-            p = sample(pass_chars, int(self.len_gth.get()))
+        if self.error is not None:
+            self.error.destroy()
 
-        password = ""
-        for i in p:
-            password += str(i)
-        self.msg.set(f"Your password is:  {str(password)}")
+        try:
+            if self.op1.get() == 1 and self.op2.get() == 1:
+                p = sample(pass_chars_spchars_nums, int(self.len_gth.get()))
+            elif self.op1.get() == 1:
+                p = sample(pass_chars_nums, int(self.len_gth.get()))
+            elif self.op2.get() == 1:
+                p = sample(pass_chars_spchars, int(self.len_gth.get()))
+            else:
+                p = sample(pass_chars, int(self.len_gth.get()))
+            password = ""
+            for i in p:
+                password += str(i)
+            self.msg.set(f"Your password is:  {str(password)}")
+
+        except ValueError:
+            self.error = Label(self.frame,text="Enter a Valid number",font=("Roboto", 11),width=50)
+            self.error.grid(row=4, column=0, columnspan=3,pady=10)
 
     def run(self):
         self.widgets()
