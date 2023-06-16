@@ -5,6 +5,7 @@ class RandomPasswordGenerator:
     def __init__(self):
         self.root = Tk()
         self.root.geometry("375x475")
+        self.root.title("Random Password Generator")
         self.op1 = IntVar()
         self.op2 = IntVar()
         self.len_gth = StringVar()
