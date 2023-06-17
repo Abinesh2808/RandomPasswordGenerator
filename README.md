@@ -37,15 +37,15 @@ python RandomPasswordGenerator.py
 ```
 If you have multiple versions of Python installed, you may need to use the specific Python version command, such as `python3` instead of `python`.
 
-6.The password generator window will appear, prompting you to enter the password length and select options.
+5.The password generator window will appear, prompting you to enter the password length and select options.
 
-7.Enter the desired password length in the provided entry field.
+6.Enter the desired password length in the provided entry field.
 
-8.Check the checkboxes if you want to include numbers and/or special characters in the password.
+7.Check the checkboxes if you want to include numbers and/or special characters in the password.
 
-9.Click the "Click to Generate Password" button.
+8.Click the "Click to Generate Password" button.
 
-The generated password will be displayed in the message area.
+9.The generated password will be displayed in the message area.
 
 ## Functionality
 The random password generator provides the following functionality:
