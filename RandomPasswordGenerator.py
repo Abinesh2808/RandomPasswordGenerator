@@ -13,7 +13,7 @@ class RandomPasswordGenerator:
         self.frame = Frame(self.root)
         self.frame.pack()
         self.error = None
-
+        self.run()
     def widgets(self):
         entry = Entry(self.frame, textvariable=self.len_gth,width=10)
         label = Label(self.frame, text="Enter Password Length: ",font=("Roboto", 11))
@@ -65,4 +65,3 @@ class RandomPasswordGenerator:
         self.root.mainloop()
 
 obj = RandomPasswordGenerator()
-obj.run()
